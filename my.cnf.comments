@@ -1,0 +1,112 @@
+###################### SERVERS ########################
+### TIPS ###
+# error.log - создать вручную
+### END TIPS ###
+
+
+[mysqld_safe]
+
+
+[mysqld]
+basedir		= /usr/local/mysql
+user		= mysql
+# Вместо skip-networking , прослушивается только localhost
+bind-address = 127.0.0.1
+
+# https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_explicit_defaults_for_timestamp
+# определяет, разрешает ли сервер определенное нестандартное поведение для значений по умолчанию и обработку значений NULL в столбцах TIMESTAMP.
+explicit_defaults_for_timestamp=1
+
+
+
+# https://dev.mysql.com/doc/refman/5.7/en/server-options.html#option_mysqld_secure-file-priv
+# Операции, связанные с импортом и экспортом данных
+secure_file_priv = /usr/local/mysql/mysql-files
+
+
+# https://dev.mysql.com/doc/refman/5.7/en/server-options.html#option_mysqld_default-time-zone
+# Этот параметр устанавливает глобальную системную переменную time_zone. Если эта опция не указана, часовой пояс по умолчанию совпадает с часовым поясом системы
+# default-time-zone='+00:00'
+
+
+# https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_character_set_server
+character_set_server=utf8
+
+
+# https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names
+# Если установлено значение 1, имена таблиц хранятся в нижнем регистре на диске, а сравнения не чувствительны к регистру.
+lower_case_table_names=1
+
+
+
+# https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_print_all_deadlocks
+# Когда эта опция включена, информация о всех взаимоблокировках в транзакциях пользователя InnoDB записывается в журнал ошибок mysqld.
+innodb_print_all_deadlocks=1
+
+
+lc-messages-dir	= /usr/local/mysql/share
+
+
+
+
+[mysqld1]
+server-id = 1
+port		= 3306
+socket		= /usr/local/mysql/run/mysqld.sock
+pid-file	= /usr/local/mysql/run/mysqld.pid
+log_error = /usr/local/mysql/log/error.log
+tmpdir		= /usr/local/mysql/tmp/mysqld1
+datadir		= /usr/local/mysql/data
+
+
+
+[mysqld2]
+server-id = 2
+port		= 3307
+socket		= /usr/local/mysql/run/mysqld.sock2
+pid-file	= /usr/local/mysql/run/mysqld.pid2
+log_error = /usr/local/mysql/log/error.log2
+tmpdir		= /usr/local/mysql/tmp/mysqld2
+datadir		= /usr/local/mysql/data_bitrix
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###################### CLIENTS ########################
+# https://dev.mysql.com/doc/refman/5.7/en/option-files.html
+[client]
+#host=127.0.0.1
+#port=3306
+user = root
+password = root
+prompt = '\p:\U:\d> '
+
+[mysql_1]
+socket = /usr/local/mysql/run/mysqld.sock
+
+
+[mysql_2]
+socket = /usr/local/mysql/run/mysqld.sock2
+
+
+
+
+
+[mysqladmin]
+
+[mysqldump]
+
+
